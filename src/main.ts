@@ -1,7 +1,9 @@
 import 'bootstrap';
-import {Aurelia} from 'aurelia-framework';
+import { Aurelia } from 'aurelia-framework';
 import environment from './environment';
-import {PLATFORM} from 'aurelia-pal';
+import { PLATFORM } from 'aurelia-pal';
+import { BaseConfig } from 'aurelia-authentication';
+import AuthConfig from './auth-config';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -13,6 +15,11 @@ export function configure(aurelia: Aurelia) {
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
   }
+
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-authentication'), (baseConfig: BaseConfig) => {
+    baseConfig.configure(AuthConfig);
+  });
+  aurelia.use.globalResources(PLATFORM.moduleName('aurelia-authentication/authFilterValueConverter'));
 
   //Uncomment the line below to enable animation.
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));
