@@ -1,8 +1,12 @@
 import { AuthService } from 'aurelia-authentication';
-import { autoinject } from 'aurelia-framework';
+import { autoinject, bindable } from 'aurelia-framework';
+import { Router } from 'aurelia-router';
 
 @autoinject()
 export class NavBar {
+  @bindable()
+  public router: Router;
+
   constructor(private authService: AuthService) { }
 
   public login() {

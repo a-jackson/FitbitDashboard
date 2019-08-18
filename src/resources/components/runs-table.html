@@ -1,0 +1,24 @@
+<template>
+  <require from="../value-converters/date-format"></require>
+  <require from="../value-converters/duration"></require>
+  <require from="../value-converters/number-format"></require>
+  <div if.bind="loading">Loading</div>
+  <div if.bind="!loading && !runs.length">You have no runs</div>
+  <table if.bind="!loading && runs.length" class="runs-table">
+    <thead>
+      <th>Start Time</th>
+      <th>Duration (min)</th>
+      <th>Distance (km)</th>
+      <th>Pace (min/km)</th>
+      <th>Average HR (bpm)</th>
+    </thead>
+    <tbody>
+      <tr repeat.for="run of runs">
+        <td>${run.startTime | dateFormat}</td>
+        <td>${run.duration | duration:true}</td>
+        <td>${run.distance | numberFormat:3}</td>
+        <td>${run.pace | duration}</td>
+        <td>${run.averageHeartRate}</td>
+      </tr>
+  </table>
+</template>

@@ -4,6 +4,7 @@ import environment from './environment';
 import { PLATFORM } from 'aurelia-pal';
 import { BaseConfig } from 'aurelia-authentication';
 import AuthConfig from './auth-config';
+import { Config } from 'aurelia-api';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -15,6 +16,10 @@ export function configure(aurelia: Aurelia) {
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
   }
+
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-api'), (config: Config) => {
+    config.registerEndpoint('fitbit', 'https://api.fitbit.com/');
+  });
 
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-authentication'), (baseConfig: BaseConfig) => {
     baseConfig.configure(AuthConfig);
