@@ -10,6 +10,7 @@ export class ActivityService {
   public async getRuns() {
     let now = new Date();
     now.setHours(now.getHours() + 1, 0, 0);
+    let runs: Run[] = [];
     let request = {
       beforeDate: now.toISOString().slice(0, -1),
       sort: 'desc',
@@ -17,19 +18,27 @@ export class ActivityService {
       offset: 0
     };
 
+
     let response = await this.apiEndpoint.find('1/user/-/activities/list.json', request);
 
-    let activities = response.activities;
-    let runs: Run[] = [];
-    for (let activity of activities) {
-      if (activity.activityName === 'Run') {
-        runs.push({
-          averageHeartRate: activity.averageHeartRate,
-          distance: activity.distance,
-          pace: activity.pace,
-          duration: activity.duration,
-          startTime: new Date(activity.startTime),
-        });
+    while (response) {
+      let activities = response.activities;
+      for (let activity of activities) {
+        if (activity.activityName === 'Run') {
+          runs.push({
+            averageHeartRate: activity.averageHeartRate,
+            distance: activity.distance,
+            pace: activity.pace,
+            duration: activity.duration,
+            startTime: new Date(activity.startTime),
+          });
+        }
+      }
+
+      if (response.pagination.next) {
+        response = await this.apiEndpoint.find(response.pagination.next);
+      } else {
+        response = null
       }
     }
 
