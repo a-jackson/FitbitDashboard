@@ -29,7 +29,7 @@ export class ActivityService {
             averageHeartRate: activity.averageHeartRate,
             distance: activity.distance,
             pace: activity.pace,
-            duration: activity.duration,
+            duration: activity.activeDuration,
             startTime: new Date(activity.startTime),
           });
         }
