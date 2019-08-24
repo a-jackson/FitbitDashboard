@@ -1,0 +1,13 @@
+.dashboard {
+  &-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .5rem;
+    flex-wrap: wrap;
+
+    .button:not(:last-child):not(.is-fullwidth) {
+      margin-right: .5rem;
+    }
+  }
+}

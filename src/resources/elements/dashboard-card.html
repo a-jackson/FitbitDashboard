@@ -1,20 +1,24 @@
-<template bindable="item">
-  <div class="card">
-    <div class="card-content">
+<template bindable="item" class="tile is-parent">
+  <require from="../value-converters/number-format"></require>
+  <require from="../value-converters/duration"></require>
+  <div class="tile is-child notification is-${item.style} box">
+    <div class="content">
       <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <i class="fa fa-${item.icon}"></i>
-          </figure>
-        </div>
+        <font-awesome-icon class="title media-left" icon="${item.icon}"></font-awesome-icon>
         <div class="media-content">
-          <p class="title is-4">${item.title}</p>
-          <p class="subtitle is-6">${item.subTitle}</p>
+          <p class="title">${item.title}</p>
+          <p class="subtitle">${item.subtitle}</p>
         </div>
-      </div>
-      <div class="content">
-        ${item.value}
       </div>
     </div>
+    <div class="content">
+      <p class="has-text-centered is-size-2" if.bind="item.type === 'number'">
+        ${item.value | numberFormat:item.dp}
+      </p>
+      <p class="has-text-centered is-size-2" if.bind="item.type === 'duration'">
+        ${item.value | duration}
+      </p>
+    </div>
+  </div>
   </div>
 </template>

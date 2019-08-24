@@ -1,6 +1,16 @@
 <template>
   <require from="../resources/components/runs-table"></require>
-  <section>
-    <runs-table></runs-table>
+  <require from="../resources/elements/dashboard-card.html"></require>
+  <section class="container dashboard-buttons">
+    <button repeat.for="item of intervals" class="button is-light" click.delegate="setStartDate(item.interval)">${item.description}</button>
+    <span>Viewing from ${startDate.toDateString()}</span>
+  </section>
+  <section class="container">
+    <div class="tile is-ancestor">
+      <dashboard-card item.bind="distance"></dashboard-card>
+      <dashboard-card item.bind="count"></dashboard-card>
+      <dashboard-card item.bind="averageDistance"></dashboard-card>
+      <dashboard-card item.bind="averagePace"></dashboard-card>
+    </div>
   </section>
 </template>

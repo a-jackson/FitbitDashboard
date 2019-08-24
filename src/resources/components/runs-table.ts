@@ -1,4 +1,3 @@
-import './runs-table.css';
 import { autoinject } from 'aurelia-framework';
 import { ActivityService } from 'services/activity-service';
 import { Run } from 'models/run';

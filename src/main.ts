@@ -2,11 +2,8 @@
 import { Aurelia } from 'aurelia-framework';
 import environment from './environment';
 import { PLATFORM } from 'aurelia-pal';
-import { BaseConfig } from 'aurelia-authentication';
-import AuthConfig from './features/auth/auth-config';
 import { Config } from 'aurelia-api';
 import { initialState } from './models/state';
-import { localStorageMiddleware } from 'aurelia-store';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -23,8 +20,8 @@ export function configure(aurelia: Aurelia) {
     config.registerEndpoint('fitbit', 'https://api.fitbit.com/');
   });
 
-  aurelia.use.plugin(PLATFORM.moduleName('features/auth'));
-  aurelia.use.plugin(PLATFORM.moduleName('features/font-awesome'));
+  aurelia.use.plugin(PLATFORM.moduleName('features/auth/index'));
+  aurelia.use.plugin(PLATFORM.moduleName('features/font-awesome/index'));
 
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-store'), { initialState });
 

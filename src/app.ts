@@ -15,8 +15,8 @@ export class App {
   }
 
   public configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Fitbit Dashboard';
-    config.addPipelineStep('authorize', AuthenticateStep); 
+    config.title = 'Dashboard';
+    config.addPipelineStep('authorize', AuthenticateStep);
     config.map([
       {
         route: ['', 'dashboard'],
@@ -24,6 +24,14 @@ export class App {
         moduleId: PLATFORM.moduleName('./pages/dashboard'),
         nav: true,
         title: 'Dashboard',
+        auth: true
+      },
+      {
+        route: ['runs'],
+        name: 'Runs List',
+        moduleId: PLATFORM.moduleName('./pages/runs-list'),
+        nav: true,
+        title: 'Runs',
         auth: true
       },
       {
