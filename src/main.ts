@@ -3,7 +3,7 @@ import { Aurelia } from 'aurelia-framework';
 import environment from './environment';
 import { PLATFORM } from 'aurelia-pal';
 import { BaseConfig } from 'aurelia-authentication';
-import AuthConfig from './auth-config';
+import AuthConfig from './features/auth/auth-config';
 import { Config } from 'aurelia-api';
 import { initialState } from './models/state';
 import { localStorageMiddleware } from 'aurelia-store';

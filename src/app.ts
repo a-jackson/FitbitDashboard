@@ -1,40 +1,36 @@
 import { PLATFORM } from 'aurelia-pal';
 import { Router, RouterConfiguration } from 'aurelia-router';
-import { ActivityService } from 'services/activity-service';
-import { State } from 'models/state';
-import { Store, localStorageMiddleware, MiddlewarePlacement, rehydrateFromLocalStorage } from 'aurelia-store';
 import { autoinject } from 'aurelia-framework';
+import { AuthHandler } from 'features/auth/auth-handler';
+import { AuthenticateStep } from 'aurelia-authentication';
 
 @autoinject()
 export class App {
   public router: Router;
 
   constructor(
-    activityService: ActivityService,
-    store: Store<State>,
+    private authHandler: AuthHandler,
   ) {
-    store.registerMiddleware(localStorageMiddleware, MiddlewarePlacement.After);
-    store.registerAction('Rehydrate', (state: State, key: string) => {
-      let newState = rehydrateFromLocalStorage(state, key) as State;
-      for (let activity of newState.activities) {
-        activity.startTime = new Date(activity.startTime);
-      }
-
-      return newState;
-    });
-    store.dispatch('Rehydrate');
-    activityService.initialise();
+    this.authHandler.start();
   }
 
   public configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Aurelia';
+    config.title = 'Fitbit Dashboard';
+    config.addPipelineStep('authorize', AuthenticateStep); 
     config.map([
       {
-        route: ['', 'welcome'],
-        name: 'welcome',
-        moduleId: PLATFORM.moduleName('./welcome'),
+        route: ['', 'dashboard'],
+        name: 'Dashboard',
+        moduleId: PLATFORM.moduleName('./pages/dashboard'),
         nav: true,
-        title: 'Welcome'
+        title: 'Dashboard',
+        auth: true
+      },
+      {
+        route: ['login'],
+        name: 'Login',
+        moduleId: PLATFORM.moduleName('./pages/login'),
+        title: 'Login',
       },
     ]);
 

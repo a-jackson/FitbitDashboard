@@ -14,7 +14,7 @@
 
     <div class="navbar-menu ${isMobileMenuActive ? 'is-active' : ''}">
       <div class="navbar-start">
-        <a repeat.for="row of router.navigation" class="navbar-item" href.bind="row.href">${row.title}</a>
+        <a repeat.for="row of router.navigation | authFilter: authenticated" class="navbar-item" href.bind="row.href">${row.title}</a>
       </div>
 
       <div class="navbar-end">

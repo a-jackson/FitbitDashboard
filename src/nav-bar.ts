@@ -15,7 +15,7 @@ export class NavBar {
   }
 
   public logout() {
-    this.authService.logout('#');
+    this.authService.logout();
   }
 
   public toggleMobileMenu(): void {

@@ -1,9 +1,11 @@
 import { BaseConfig } from "aurelia-authentication";
-import Environment from './environment';
+import Environment from '../../environment';
 
 export default {
-  loginRedirect: '',
+  loginRedirect: '#/',
+  logoutRedirect: '#/login',
   configureEndpoints: ['fitbit'],
+  loginRoute: '#/login',
   providers: {
     fitbit: {
       name: 'fitbit',
