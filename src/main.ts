@@ -5,6 +5,8 @@ import { PLATFORM } from 'aurelia-pal';
 import { BaseConfig } from 'aurelia-authentication';
 import AuthConfig from './auth-config';
 import { Config } from 'aurelia-api';
+import { initialState } from './models/state';
+import { localStorageMiddleware } from 'aurelia-store';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -25,6 +27,8 @@ export function configure(aurelia: Aurelia) {
     baseConfig.configure(AuthConfig);
   });
   aurelia.use.globalResources(PLATFORM.moduleName('aurelia-authentication/authFilterValueConverter'));
+
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-store'), { initialState });
 
   //Uncomment the line below to enable animation.
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));

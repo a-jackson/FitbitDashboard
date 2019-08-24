@@ -13,9 +13,11 @@
     "aurelia-authentication": "^3.8.3",
     "aurelia-bootstrapper": "^2.3.2",
     "aurelia-fetch-client": "^1.0.0",
+    "aurelia-store": "^1.4.0",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.3",
     "jquery": "^3.3.1",
+    "rxjs": "^6.5.2",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {

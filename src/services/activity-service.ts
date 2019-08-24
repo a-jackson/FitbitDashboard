@@ -1,37 +1,61 @@
+import { PLATFORM } from 'aurelia-pal';
 import { autoinject, inject } from "aurelia-framework";
 import { Rest, Config, Endpoint } from "aurelia-api";
 import { Run } from "models/run";
+import { ActivityResponse, Activity } from "models/activity";
+import { Store } from 'aurelia-store';
+import { State } from 'models/state';
 
-@inject(Endpoint.of('fitbit'))
+const activityAction = 'ActivityAction';
+
+@inject(Endpoint.of('fitbit'), Store)
 export class ActivityService {
 
-  constructor(private apiEndpoint: Rest) { }
+  constructor(
+    private apiEndpoint: Rest,
+    private store: Store<State>
+  ) {
+    this.store.registerAction(activityAction, (state: State) => this.updateActivitiesAction(state));
+  }
 
-  public async getRuns() {
-    let now = new Date();
-    now.setHours(now.getHours() + 1, 0, 0);
-    let runs: Run[] = [];
+  public initialise() {
+    this.store.dispatch(activityAction);
+  }
+
+  private async updateActivitiesAction(state: State) {
+    let newActivities: Activity[];
+    if (!state.activities.length) {
+      newActivities = await this.getNewActivities(new Date());
+    } else {
+      const endDate = state.activities[0].startTime;
+      newActivities = await this.getNewActivities(undefined, endDate);
+    }
+
+    const newState = Object.assign({}, state);
+    newState.activities = [...newActivities, ...newState.activities];
+    return newState;
+  }
+
+  private async getNewActivities(beforeDate?: Date | string, afterDate?: Date | string) {
+    if (beforeDate && afterDate) {
+      throw new Error('Cannot use both before date and after date')
+    }
+
     let request = {
-      beforeDate: now.toISOString().slice(0, -1),
+      beforeDate: this.processDate(beforeDate),
+      afterDate: this.processDate(afterDate),
       sort: 'desc',
       limit: 20,
       offset: 0
     };
 
-
-    let response = await this.apiEndpoint.find('1/user/-/activities/list.json', request);
-
+    let response = await this.apiEndpoint.find('1/user/-/activities/list.json', request) as ActivityResponse;
+    let activities: Activity[] = [];
     while (response) {
-      let activities = response.activities;
-      for (let activity of activities) {
-        if (activity.activityName === 'Run') {
-          runs.push({
-            averageHeartRate: activity.averageHeartRate,
-            distance: activity.distance,
-            pace: activity.pace,
-            duration: activity.activeDuration,
-            startTime: new Date(activity.startTime),
-          });
+      for (let activity of response.activities) {
+        activity.startTime = new Date(activity.startTime);
+        if (!afterDate || activity.startTime !== new Date(afterDate)) {
+          activities.push(activity);
         }
       }
 
@@ -42,6 +66,18 @@ export class ActivityService {
       }
     }
 
-    return runs;
+    return activities;
+  }
+
+  private processDate(date?: Date | string): string | undefined {
+    if (!date) {
+      return;
+    }
+
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+
+    return date.toISOString().slice(0, -1);;
   }
 }
