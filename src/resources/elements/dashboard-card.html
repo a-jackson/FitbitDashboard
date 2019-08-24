@@ -1,0 +1,20 @@
+<template bindable="item">
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <i class="fa fa-${item.icon}"></i>
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">${item.title}</p>
+          <p class="subtitle is-6">${item.subTitle}</p>
+        </div>
+      </div>
+      <div class="content">
+        ${item.value}
+      </div>
+    </div>
+  </div>
+</template>

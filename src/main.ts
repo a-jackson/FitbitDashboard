@@ -23,10 +23,8 @@ export function configure(aurelia: Aurelia) {
     config.registerEndpoint('fitbit', 'https://api.fitbit.com/');
   });
 
-  aurelia.use.plugin(PLATFORM.moduleName('aurelia-authentication'), (baseConfig: BaseConfig) => {
-    baseConfig.configure(AuthConfig);
-  });
-  aurelia.use.globalResources(PLATFORM.moduleName('aurelia-authentication/authFilterValueConverter'));
+  aurelia.use.plugin(PLATFORM.moduleName('features/auth'));
+  aurelia.use.plugin(PLATFORM.moduleName('features/font-awesome'));
 
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-store'), { initialState });
 
