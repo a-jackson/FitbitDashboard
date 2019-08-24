@@ -1,13 +1,15 @@
 import { BaseConfig } from "aurelia-authentication";
+import Environment from './environment';
+
 export default {
-  loginRedirect: true,
+  loginRedirect: '',
   configureEndpoints: ['fitbit'],
   providers: {
     fitbit: {
       name: 'fitbit',
       oauthType: '2.0',
       clientId: '22B6Y5',
-      redirectUri: 'http://localhost:8080',
+      redirectUri: Environment.redirectUri,
       authorizationEndpoint: 'https://www.fitbit.com/oauth2/authorize',
       responseType: 'token',
       scope: ['profile activity heartrate'],

@@ -24,10 +24,10 @@
         <li class="loader" if.bind="router.isNavigating">
           <i class="fa fa-spinner fa-spin fa-2x"></i>
         </li>
-        <li if.bind="!authService.isAuthenticated()">
+        <li if.bind="!authService.authenticated">
           <a href="#" click.delegate="login()">Login with Fitbit</a>
         </li>
-        <li if.bind="authService.isAuthenticated()">
+        <li if.bind="authService.authenticated">
           <a href="#" click.delegate="logout()">Logout</a>
         </li>
       </ul>

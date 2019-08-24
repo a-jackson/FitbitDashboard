@@ -1,4 +1,5 @@
 export default {
   debug: true,
-  testing: false
+  testing: false,
+  redirectUri: 'https://fitbit.andrewjackson.dev'
 };
