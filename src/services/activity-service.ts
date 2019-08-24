@@ -54,7 +54,7 @@ export class ActivityService {
     while (response) {
       for (let activity of response.activities) {
         activity.startTime = new Date(activity.startTime);
-        if (!afterDate || activity.startTime !== new Date(afterDate)) {
+        if (!afterDate || activity.startTime.getTime() !== new Date(afterDate).getTime()) {
           activities.push(activity);
         }
       }

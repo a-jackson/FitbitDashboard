@@ -1,10 +1,9 @@
 <template>
   <require from="./resources/components/runs-table"></require>
   <section class="au-animate" if.bind="!authService.authenticated">
-    <p>You must login with Fitbit for access. Click the link below.</p>
+    <p>You must login with Fitbit for access. Click the link above.</p>
   </section>
   <section if.bind="authService.authenticated">
-    <p>You're logged in!</p>
     <runs-table></runs-table>
   </section>
 </template>

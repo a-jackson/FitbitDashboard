@@ -14,7 +14,7 @@
     "aurelia-bootstrapper": "^2.3.2",
     "aurelia-fetch-client": "^1.0.0",
     "aurelia-store": "^1.4.0",
-    "bootstrap": "^3.3.6",
+    "bulma": "^0.7.5",
     "font-awesome": "^4.6.3",
     "jquery": "^3.3.1",
     "rxjs": "^6.5.2",

@@ -1,36 +1,33 @@
 <template>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-navbar-collapse-1">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
+  <nav class="navbar is-fixed-top" role="navigation">
+    <div class="navbar-brand" href="#">
+      <a class="navbar-item">
         <i class="fa fa-home"></i>
         <span>${router.title}</span>
       </a>
+      <div class="navbar-burger burger" click.delegate="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
 
-    <div class="collapse navbar-collapse" id="navigation-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-          <a data-toggle="collapse" data-target="#navigation-navbar-collapse-1.in" href.bind="row.href">${row.title}</a>
-        </li>
-      </ul>
+    <div class="navbar-menu ${isMobileMenuActive ? 'is-active' : ''}">
+      <div class="navbar-start">
+        <a repeat.for="row of router.navigation" class="navbar-item" href.bind="row.href">${row.title}</a>
+      </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="loader" if.bind="router.isNavigating">
+      <div class="navbar-end">
+        <div class="loader navbar-item" if.bind="router.isNavigating">
           <i class="fa fa-spinner fa-spin fa-2x"></i>
-        </li>
-        <li if.bind="!authService.authenticated">
-          <a href="#" click.delegate="login()">Login with Fitbit</a>
-        </li>
-        <li if.bind="authService.authenticated">
-          <a href="#" click.delegate="logout()">Logout</a>
-        </li>
-      </ul>
+        </div>
+        <a if.bind="!authService.authenticated" href="#" click.delegate="login()" class="navbar-item">
+          Login with Fitbit
+        </a>
+        <a if.bind="authService.authenticated" href="#" click.delegate="logout()" class="navbar-item">
+          Logout
+        </a>
+      </div>
     </div>
   </nav>
 </template>

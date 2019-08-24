@@ -6,6 +6,7 @@ import { Router } from 'aurelia-router';
 export class NavBar {
   @bindable()
   public router: Router;
+  private isMobileMenuActive = false;
 
   constructor(private authService: AuthService) { }
 
@@ -15,5 +16,9 @@ export class NavBar {
 
   public logout() {
     this.authService.logout('#');
+  }
+
+  public toggleMobileMenu(): void {
+    this.isMobileMenuActive = !this.isMobileMenuActive;
   }
 }
