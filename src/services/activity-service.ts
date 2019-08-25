@@ -33,6 +33,7 @@ export class ActivityService {
 
     const newState = Object.assign({}, state);
     newState.activities = [...newActivities, ...newState.activities];
+    newState.activitiesLoading = false;
     return newState;
   }
 

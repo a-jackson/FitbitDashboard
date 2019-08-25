@@ -31,12 +31,11 @@ export class Dashboard {
     this.store.registerAction('setStartDate', (state: State, interval: number) => this.setStartDateAction(state, interval));
   }
 
-  // @computedFrom('runsThisMonth')
-  public get distance(): DashboardItem {
+  public get distanceRun(): DashboardItem {
     let value = this.runsInPeriod.reduce((total, run) => total + (run.distance ? run.distance : 0), 0);
 
     return {
-      title: 'Distance Run',
+      title: 'Total Distance Run',
       subtitle: '(km)',
       value,
       icon: 'running',
@@ -46,7 +45,7 @@ export class Dashboard {
     };
   }
 
-  public get count(): DashboardItem {
+  public get runCount(): DashboardItem {
     return {
       title: 'Number of Runs',
       value: this.runsInPeriod.length,
@@ -57,10 +56,10 @@ export class Dashboard {
     };
   }
 
-  public get averageDistance(): DashboardItem {
+  public get averageDistanceRun(): DashboardItem {
     const size = this.runsInPeriod.length;
     return {
-      title: 'Average Distance',
+      title: 'Average Distance Run',
       subtitle: '(km)',
       value: this.runsInPeriod.reduce((total, x) => total + ((x.distance ? x.distance : 0) / size), 0),
       icon: 'tachometer-alt',
@@ -70,13 +69,13 @@ export class Dashboard {
     };
   }
 
-  public get averagePace(): DashboardItem {
+  public get averageRunPace(): DashboardItem {
     const size = this.runsInPeriod.length;
     return {
-      title: 'Average Pace',
+      title: 'Average Run Pace',
       subtitle: '(min)',
       value: this.runsInPeriod.reduce((total, x) => total + ((x.pace ? x.pace : 0) / size), 0),
-      icon: 'tachometer-alt',
+      icon: 'stopwatch',
       style: 'warning',
       type: 'duration'
     };

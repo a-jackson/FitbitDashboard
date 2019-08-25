@@ -7,10 +7,10 @@
   </section>
   <section class="container">
     <div class="tile is-ancestor">
-      <dashboard-card item.bind="distance"></dashboard-card>
-      <dashboard-card item.bind="count"></dashboard-card>
-      <dashboard-card item.bind="averageDistance"></dashboard-card>
-      <dashboard-card item.bind="averagePace"></dashboard-card>
+      <dashboard-card item.bind="distanceRun" loading.bind="state.activitiesLoading"></dashboard-card>
+      <dashboard-card item.bind="runCount" loading.bind="state.activitiesLoading"></dashboard-card>
+      <dashboard-card item.bind="averageDistanceRun" loading.bind="state.activitiesLoading"></dashboard-card>
+      <dashboard-card item.bind="averageRunPace" loading.bind="state.activitiesLoading"></dashboard-card>
     </div>
   </section>
 </template>

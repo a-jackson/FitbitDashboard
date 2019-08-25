@@ -18,8 +18,8 @@
       </div>
 
       <div class="navbar-end">
-        <div class="loader navbar-item" if.bind="router.isNavigating">
-          <i class="fa fa-spinner fa-spin fa-2x"></i>
+        <div class="navbar-item fa-3x fa-spin" if.bind="router.isNavigating">
+          <font-awesome-icon icon="spinner"></font-awesome-icon>
         </div>
         <a if.bind="!authService.authenticated" href="#" click.delegate="login()" class="navbar-item">
           Login with Fitbit
