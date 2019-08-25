@@ -1,0 +1,7 @@
+@import "~bulma/bulma";
+
+.dashboard-card {
+  @include until($tablet) {
+    width: 100%;
+  }
+}

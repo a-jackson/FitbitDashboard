@@ -1,25 +1,19 @@
-<template bindable="item,loading" class="tile is-parent">
-  <require from="../value-converters/number-format"></require>
-  <require from="../value-converters/duration"></require>
-  <div class="tile is-child notification is-${item.style} box">
-    <div class="content">
-      <div class="media">
-        <font-awesome-icon class="title media-left" icon="${item.icon}"></font-awesome-icon>
-        <div class="media-content">
-          <p class="title">${item.title}</p>
-          <p class="subtitle">${item.subtitle}</p>
-        </div>
-      </div>
-    </div>
-    <div class="content" if.bind="!loading">
+<template bindable="item,loading" class="notification is-${item.style}">
+  <require from="./dashboard-card.scss"></require>
+  <div class="dashboard-card">
+    <header class="dashboard-card-header">
+      <p class="dashboard-card-header__title title is-5 is-marginless">${item.title}</p>
+      <font-awesome-icon class="dashboard_card-header__icon fa-lg" icon="${item.icon}"></font-awesome-icon>
+    </header>
+    <div class="dashboard-card-content" if.bind="!loading">
       <p class="has-text-centered is-size-2" if.bind="item.type === 'number'">
-        ${item.value | numberFormat:item.dp}
+        ${item.value | numberFormat:item.dp} ${item.unit}
       </p>
       <p class="has-text-centered is-size-2" if.bind="item.type === 'duration'">
-        ${item.value | duration}
+        ${item.value | duration} ${item.unit}
       </p>
     </div>
-    <div class="content fa-2x fa-spin has-text-centered" if.bind="loading">
+    <div class="dashboard-card-content fa-2x fa-spin has-text-centered" if.bind="loading">
       <font-awesome-icon icon="spinner"></font-awesome-icon>
     </div>
   </div>

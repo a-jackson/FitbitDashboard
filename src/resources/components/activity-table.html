@@ -1,0 +1,23 @@
+<template>
+  <div class="fa-spin fa-3x" if.bind="loading">
+    <font-awesome-icon icon="spinner"></font-awesome-icon>
+  </div>
+  <div if.bind="!loading && !activities.length">You have no data</div>
+  <table if.bind="!loading && activities.length" class="table is-hoverable">
+    <thead class="thead">
+      <th class="th">Start Time</th>
+      <th class="th">Duration (min)</th>
+      <th class="th">Distance (km)</th>
+      <th class="th">Pace (min/km)</th>
+      <th class="th">Average HR (bpm)</th>
+    </thead>
+    <tbody class="tbody">
+      <tr repeat.for="activity of activities" class="td">
+        <td class="td">${activity.startTime | dateFormat}</td>
+        <td class="td">${activity.duration | duration:true}</td>
+        <td class="td">${activity.distance | numberFormat:3}</td>
+        <td class="td">${activity.pace | duration}</td>
+        <td class="td">${activity.averageHeartRate}</td>
+      </tr>
+  </table>
+</template>

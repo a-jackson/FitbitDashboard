@@ -2,7 +2,7 @@ export type bulmaColor = 'primary' | 'info' | 'link' | 'success' | 'warning' | '
 
 export interface DashboardItem {
   title: string,
-  subtitle?: string,
+  unit?: string,
   value: string | Number,
   icon: string,
   style: bulmaColor,

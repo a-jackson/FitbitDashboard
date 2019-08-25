@@ -1,0 +1,18 @@
+.dashboard-card {
+  &-header {
+    display: flex;
+    align-items: center;
+
+    &__title {
+      flex-grow: 1;
+    }
+
+    &__icon {
+      margin-left: 1rem;
+    }
+  }
+
+  &__content {
+
+  }
+}

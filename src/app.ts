@@ -35,6 +35,14 @@ export class App {
         auth: true
       },
       {
+        route: ['walks'],
+        name: 'Walks List',
+        moduleId: PLATFORM.moduleName('./pages/walks-list'),
+        nav: true,
+        title: 'Walks',
+        auth: true
+      },
+      {
         route: ['login'],
         name: 'Login',
         moduleId: PLATFORM.moduleName('./pages/login'),
