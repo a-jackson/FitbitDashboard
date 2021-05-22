@@ -67,6 +67,7 @@
   ],
   "scripts": {
     "build": "au build",
+    "buildprod": "au build --env prod",
     "start": "au run"
   },
   "engines": {
